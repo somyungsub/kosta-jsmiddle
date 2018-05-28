@@ -1,0 +1,36 @@
+﻿<!--http://localhost:52273/public/21-3.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>jQuery Ajax Basic</title>
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax('/data.xml', {
+                success: function (data) {
+
+                    // find -> 찾아라 전부
+                    var $products = $(data).find('product');
+                    console.log($products);
+                    var h1 = $('<h1></h1>');
+                    console.log(h1);
+
+                    $(data).find('product').each(function () {
+                        var name =$(this).find('name').text();
+                        var price =$(this).find('price').text();
+
+                        // 출력 시작끝태그 -> 하나생성하란 것
+                        $('<h1></h1>').text(name + ' : ' + price).appendTo('body'); // body 자식레벨로
+                    });
+//                    $('body').append(); // body 레벨 자식으로
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>
